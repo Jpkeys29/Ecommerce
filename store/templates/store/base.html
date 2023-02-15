@@ -79,8 +79,14 @@
                         <li>
                             
                             <a class="dropdown-item" href="{% url 'store' %}"> All </a>
-                        
+                            
                         </li>
+                        <!--To loop through all categories-->
+                        {% for category in all_categories %}
+                        
+                           <li> <a class="dropdown-item" href=""> {{ category.name | capfirst }} </a></li>
+
+                        {% endfor %}
                     
         
                     
