@@ -63,7 +63,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'store.views.categories', #So that the context is available in all pages. It comes from views/categories
+                'store.views.categories', #So that the context is available in all pages. It comes from views-categories
             ],
         },
     },
