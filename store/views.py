@@ -17,7 +17,7 @@ def categories(request):
 def list_category(request, category_slug=None):
     #Query to select one item:
     category = get_object_or_404(Category, slug=category_slug)
-    #Filter our products that have the above category:
+    #Filter all the products that have the above category: It will return all the list of products under each category
     products = Product.objects.filter(category=category)
     return render(request, 'store/list-category.html', {'category':category, 'products':products})
 

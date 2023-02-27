@@ -7,7 +7,7 @@ class Category(models.Model):
     slug = models.SlugField(max_length=250, unique=True)
 
     class Meta: 
-        verbose_name_plural = 'categories'
+        verbose_name_plural = 'categories'  #to rename the model to 'categories' in the admin page
 
     def __str__(self):
         return self.name
@@ -19,7 +19,7 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    # Create a foreing key in order to link the category field and category model in our product class:
+    # Create a foreign key in order to link the product model to a specific category model:
     category = models.ForeignKey(Category,related_name='product',on_delete=models.CASCADE,null=True)
     title = models.CharField(max_length=250)
     brand = models.CharField(max_length=250, default='un-branded')
@@ -29,7 +29,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='images/')
 
     class Meta: 
-        verbose_name_plural = 'products'
+        verbose_name_plural = 'products'  
 
     def __str__(self):
         return self.title
