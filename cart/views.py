@@ -1,11 +1,26 @@
 from django.shortcuts import render
+from .cart import Cart
+from store.models import Product
+from django.shortcuts import get_object_or_404
 
 def cart_summary(request):
     return render(request, 'cart/cart-summary.html')
+
 def cart_add(request):
-    pass
+    cart = Cart(request)
+
+    # To check if we are getting a AJAX request:
+    if request.POST.get('action') == 'POST':
+        product_id = int(request.POST.get('product_id'))
+        product_quantity = int(request.POST.get('product_quantity'))
+        #Getting a object from the model 'product' with id from product id from ajax request
+        product = get_object_or_404(Product, id=product_id)
+        cart.add(product=product, product_qty = product_quantity)
+
+
 def cart_update(request):
     pass
+
 def cart_delete(request):
     pass
 
