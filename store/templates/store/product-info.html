@@ -71,7 +71,7 @@
 
                             <div class="col-6 text-end">
                                 
-                                <button type="button" id="add-button" value="{{product.id}}" class="btn btn-secondary btn-sm">
+                                <button type="button" id="add-button" value="{{product.id}}" class="btn btn-success btn-sm">
                         
                                 Add to cart 
                             
@@ -106,16 +106,19 @@
             url: '{% url "cart-add" %}',
             data: {
                 product_id: $('#add-button').val(),
-                product_quantity: $('#select option: selected').text(),
-                csrfmiddlewaretoken: '{{csrf_token}}',
+                product_quantity: $('#select option:selected').text(),
+                csrfmiddlewaretoken: "{{csrf_token}}",
                 action: 'post'
             },
 
             success: function(json){
+                console.log(json)
+            // To output the product quantity referencing the cart quantity "cart-qty" from base.html, line 135 and 'qty' from views.py line 20
+                document.getElementById("cart-qty").textContent = json.qty 
 
             },
-            error: function(xhr,errmsg,err){
-                
+            error: function(xhr, errmsg, err){
+
             }
 
         });

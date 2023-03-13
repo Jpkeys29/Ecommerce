@@ -26,4 +26,6 @@ class Cart():
 
         self.session.modified = True #Just telling Django that the session has been modified
 
-            
+    #To obtain the totals of products in session:
+    def __len__(self):
+        return sum(item['qty'] for item in self.cart.values())       
