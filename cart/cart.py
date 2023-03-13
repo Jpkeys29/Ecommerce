@@ -53,5 +53,9 @@ class Cart():
         #To return the total price:
             yield item
 
+    #To create a total price:
+    def get_total(self):
+        return sum(Decimal(item['price']) * item['qty'] for item in self.cart.values())
+
 
            
