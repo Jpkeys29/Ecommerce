@@ -1,3 +1,6 @@
+from decimal import Decimal
+from store.models import Product
+
 class Cart():
     def __init__(self,request):
 
@@ -28,4 +31,27 @@ class Cart():
 
     #To obtain the totals of products in session:
     def __len__(self):
-        return sum(item['qty'] for item in self.cart.values())       
+        return sum(item['qty'] for item in self.cart.values())  
+
+    # To loop(iter:iterate) through all the session data:
+    def __iter__(self):
+        all_product_ids = self.cart.keys()
+        #to match all the products in the cart:
+        products = Product.objects.filter(id__in=all_product_ids)
+        #To copy an instance of session data:
+        cart = self.cart.copy()
+        #To loop through each product and add data from the database:
+        for product in products:
+            cart[str(product.id)]['product'] = product
+            
+        #To define price:
+        for item in cart.values():
+        #To import price from a string to decimals:
+            item['price'] = Decimal(item['price'])
+        #To create a total integer:
+            item['total'] = item['price'] * item['qty']
+        #To return the total price:
+            yield item
+
+
+           
