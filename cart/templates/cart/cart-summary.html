@@ -127,7 +127,7 @@
 
  <!--Ajax function for delete button-->
  <script>
-    $(document).on('click', '.delete-button', function(e){
+  $(document).on('click', '.delete-button', function(e){
 
     e.preventDefault();
 
@@ -141,9 +141,15 @@
         },
 
         success: function(json){
-        //     console.log(json)
+          // To reflect the delete on the cart:
+          location.reload();   
+            
         // // To output the product quantity referencing the cart quantity "cart-qty" from base.html, line 135 and 'qty' from views.py line 20
-        //     document.getElementById("cart-qty").textContent = json.qty 
+            document.getElementById("cart-qty").textContent = json.qty 
+
+            document.getElementById("total").textContent = json.total  
+
+            // nb. .qty and .total are the keys referenced in the jason response from views.py line 38
 
         },
         error: function(xhr, errmsg, err){

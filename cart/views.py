@@ -23,9 +23,27 @@ def cart_add(request):
         response = JsonResponse({'qty': cart_quantity})
         return response
 
+
+def cart_delete(request):
+    cart = Cart(request)
+    if request.POST.get('action') == 'post':
+        product_id = int(request.POST.get('product_id'))
+        # Delete function based on product id
+        cart.delete(product=product_id)
+        #Cart quantity updated after deleting a product:
+        cart_quantity = cart.__len__()
+        #Cart total price:
+        cart_total = cart.get_total()
+        #Return JSON response
+        response = JsonResponse({'qty': cart_quantity, 'total':cart_total})
+        return response
+
+
+
+    
+
+
 def cart_update(request):
     pass
 
-def cart_delete(request):
-    pass
 
