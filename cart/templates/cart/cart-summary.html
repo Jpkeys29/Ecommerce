@@ -63,7 +63,7 @@
 
                   &nbsp; 
                   
-                  <select id="">
+                  <select id="select{{product.id}}">
                   
                     <option selected>
                   
@@ -83,7 +83,7 @@
                   
                   <br> <br>
 
-                  <button type="button" id="update-button"
+                  <button type="button" data-index="{{product.id}}"
                     class="btn btn-primary btn-sm update-button">
                     Update
                   
@@ -115,14 +115,13 @@
 
       <div class="col-12 text-end">
  
-        <div class="h6 fw-bold"> Sub total: $ <div id="subtotal" class="d-inline-flex">{{cart.get_total}}</div></div>
+        <div class="h6 fw-bold"> Sub total: $ <div id="total" class="d-inline-flex">{{cart.get_total}}</div></div>
  
       </div>
  
 
     </div>
   
-
  </main>
 
  <!--Ajax function for delete button-->
@@ -159,8 +158,45 @@
     });
 
     })
-  
 
+  // Ajax function for update button
+
+  $(document).on('click', '.update-button', function(e){
+
+    e.preventDefault();
+
+    var theproductid = $(this).data('index');
+
+    $.ajax({
+        type: 'POST',
+        url: '{% url "cart-update" %}',
+        data: {
+            product_id: $(this).data('index'),
+            product_quantity: $('#select' + theproductid + ' option:selected').text(),
+            csrfmiddlewaretoken: "{{csrf_token}}",
+            action: 'post'
+        },
+
+        success: function(json){
+          // To reflect the delete on the cart:
+          location.reload();   
+            
+        // // To output the product quantity referencing the cart quantity "cart-qty" from base.html, line 135 and 'qty' from views.py line 20
+            document.getElementById("cart-qty").textContent = json.qty 
+
+            document.getElementById("total").textContent = json.total  
+
+            // nb. .qty and .total are the keys referenced in the jason response from views.py line 38
+
+        },
+        error: function(xhr, errmsg, err){
+
+        }
+
+    });
+
+})
+  
 
  </script>
 
