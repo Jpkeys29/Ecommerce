@@ -39,7 +39,10 @@ class Cart():
         #to match all the products in the cart:
         products = Product.objects.filter(id__in=all_product_ids)
         #To copy an instance of session data:
-        cart = self.cart.copy()
+
+        import copy
+
+        cart = copy.deepcopy(self.cart)
         #To loop through each product and add data from the database:
         for product in products:
             cart[str(product.id)]['product'] = product
