@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import CreateUserForm, LoginForm
-from django.contrib.auth.models import auth
+from .forms import CreateUserForm, LoginForm, UpdateUserForm
+from django.contrib.auth.models import auth,User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 
@@ -41,11 +41,29 @@ def user_logout(request):
 def dashboard(request):
     return render(request, 'account/dashboard.html')
 
-@login_required(login_url='my-login') #The decorator prevents unauthenticated users from login in
+@login_required(login_url='my-login') 
 def profile_management(request):
-    return render(request, 'account/profile-management.html')
 
-@login_required(login_url='my-login') #The decorator prevents unauthenticated users from login in
+    #updating username and email 
+
+    if request.method == 'POST':
+        user_form = UpdateUserForm(request.POST, instance=request.user)
+        if user_form.is_valid():
+            user_form.save()
+            return redirect('dashboard')
+        
+    #To populate the user's information
+    user_form = UpdateUserForm(instance=request.user)
+
+    context = {'user_form':user_form}
+
+    return render(request, 'account/profile-management.html', context)
+
+@login_required(login_url='my-login') 
 def delete_account(request):
+    user = User.objects.get(id=request.user.id)
+    if request.method == 'POST':
+        user.delete()
+        return redirect('store')
     return render(request,'account/delete-account.html')
     

@@ -16,6 +16,7 @@ class CreateUserForm(UserCreationForm):
 
     #Mark email field as required:
         self.fields['email'].required = True
+    
 
     #Email validation
     def clean_email(self):
@@ -27,8 +28,27 @@ class CreateUserForm(UserCreationForm):
         
         return email   #so that the email gets save in the db
 
-#login form
+#Login form
 class LoginForm(AuthenticationForm):
 
     username = forms.CharField(widget=TextInput())
     password = forms.CharField(widget=PasswordInput)
+
+#Update form
+
+class UpdateUserForm(forms.ModelForm):
+    password = None  #password does not need to be updated
+
+    #To validate email(unique email)
+    def __init__(self, *args, **kwargs):
+        super(UpdateUserForm,self).__init__(*args, **kwargs)
+
+    #Mark email field as required:
+        self.fields['email'].required = True
+
+    class Meta:
+        model = User
+
+        fields = ['username','email']
+        exclude = ['password1', 'password1']
+
