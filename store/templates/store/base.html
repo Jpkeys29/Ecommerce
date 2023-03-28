@@ -104,19 +104,31 @@
             
             <ul class="navbar-nav ms-auto">
 
+                <!--To dynamically change the 'register' and 'login' buttons -->
+                {% if user.is_authenticated %}
 
-                <li class="nav-item">
-            
+                    <li class="nav-item">
+                
+                        <a class="btn btn-alert navbar-btn text-white" type="button"  href="{% url 'dashboard' %}"> Dashboard </a>
+                        
+                    </li>
+                    
+                    {% else %}
                     <a class="btn btn-alert navbar-btn text-white" type="button"  href="{% url 'register' %}"> Register </a>
 
-                </li>
+                {% endif %}
 
+                {% if user.is_authenticated %}
 
                 <li class="nav-item">
 
-                    <a class="btn btn-alert navbar-btn text-white" type="button"  href="{% url 'my-login' %}"> Login </a>
-
+                    <a class="btn btn-alert navbar-btn text-white" type="button"  href="{% url 'logout' %}"> Logout </a>
+                    
                 </li>
+                    {% else %}   
+                    <a class="btn btn-alert navbar-btn text-white" type="button"  href="{% url 'my-login' %}"> Login </a>
+                
+                {% endif %}
 
 
                 &nbsp; &nbsp; &nbsp;
