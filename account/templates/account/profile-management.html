@@ -14,6 +14,11 @@
 
     <body>
         <br>
+        <div class="container bg-white shadow-md p-5 form-layout">
+            <h3><i class="fa-solid fa-user"></i> &nbsp; Profile Management</h3>
+            <hr>
+        </div>
+        <br>
 
         <div class="container bg-white shadow-md p-5 form-layout">
             <h3> Update your account </h3>
@@ -26,7 +31,9 @@
                 {{user_form.email|as_crispy_field}}
                 
                 <br>
-                <button type="submit" class="btn btn-dark btn-sm w-100 btn-block p-2"> &nbsp; Update your account</button>
+                <!--<button type="submit" class="btn btn-dark btn-sm w-100 btn-block p-2"> &nbsp; Update your account</button>-->
+                <button type="submit" class="btn btn-dark rounded"> &nbsp; Update your account</button>
+                
 
             </form>   
         </div>
@@ -36,7 +43,7 @@
             <h3>Delete your account</h3>
             <hr>
             <br>
-            <a class="btn btn-outline-danger navbar-btn text-red" type="button" href="{% url 'delete-account' %}">Delete account</a>
+            <a class="btn btn-outline-danger navbar-btn text-red rounded" type="button" href="{% url 'delete-account' %}">Delete account</a>
             
         </div>
     </body>

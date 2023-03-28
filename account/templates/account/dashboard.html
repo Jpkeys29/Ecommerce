@@ -14,14 +14,9 @@
     <div class="container bg-white shadow-md p-5 form-layout">
         <h3>Welcome {{user}}!</h3>
         <hr>
-        <p>This is your dashboard where you can perform any of the following:</p>
-        <li>Manage your account</li>
+        <p>This is your dashboard where you can manage your profile</p>
+        <a class="btn btn-dark rounded" type="button" href="{% url 'profile-management' %}">Profile Management</a>
         <br>
-        <a class="btn btn-outline-danger navbar-btn text-red" type="button" href="{% url 'logout' %}">Logout</a>
-    </div>
-    <div class="container bg-white shadow-md p-5 form-layout">
-        <h3>Manager Account</h3>       
-        <a class="btn btn-outline-danger navbar-btn text-red" type="button" href="{% url 'profile-management' %}">Profile Management</a>
     </div>
 
 </body>
