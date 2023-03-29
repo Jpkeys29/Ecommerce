@@ -38,6 +38,11 @@ class LoginForm(AuthenticationForm):
 
 class UpdateUserForm(forms.ModelForm):
     password = None  #password does not need to be updated
+    class Meta:
+        model = User
+
+        fields = ['username','email']
+        exclude = ['password1', 'password1']
 
     #To validate email(unique email)
     def __init__(self, *args, **kwargs):
@@ -46,9 +51,4 @@ class UpdateUserForm(forms.ModelForm):
     #Mark email field as required:
         self.fields['email'].required = True
 
-    class Meta:
-        model = User
-
-        fields = ['username','email']
-        exclude = ['password1', 'password1']
 
