@@ -10,7 +10,7 @@ class Cart():
         #Returning customer - obtain their existing session. 'session_key' could be any other name
         cart = self.session.get('session_key')
 
-        #New user - create a new session
+        #New user - create a new session. It keeps all of the cart items
         if 'session_key' not in request.session:
             cart = self.session['session_key'] = {}
 
