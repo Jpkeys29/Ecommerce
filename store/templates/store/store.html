@@ -5,6 +5,10 @@
 
 
 {% block content %}
+    
+    <style>
+      
+    </style>
 
 
     <!-- Introduction section -->
@@ -30,9 +34,12 @@
 
 
                 <br>
-        
+
+                {% if user.is_authenticated %}
+                 {% else %}
+
                 <a href="{% url 'register' %}" class="btn btn-primary my-2 rounded"><i class="fa-solid fa-user-plus"></i> &nbsp; Create an account </a>
-                
+                {% endif %}
                 
             </div>
         
@@ -44,6 +51,7 @@
 <!-- All products section -->
 
     <div class="album py-5 bg-light"> <!--Main Background-->
+                
         
         <div class="container">
     
@@ -57,14 +65,14 @@
           <!--Main Row-->
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
 
-            <!--We reference by the key from context-->
+            <!--Reference by the key from context-->
             {% for product in my_products %}
 
               <div class="col">
 
                 <div class="card shadow-sm">
 
-                  <img class="img-fluid" alt="Responsive image" src="{{product.image.url}}">
+                  <img class="img-fluid"  alt="Responsive image" src="{{product.image.url}}">
 
                   <div class="card-body">
 

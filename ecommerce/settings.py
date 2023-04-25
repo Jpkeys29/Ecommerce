@@ -130,7 +130,7 @@ STATICFILES_DIRS = [BASE_DIR/'static']
 
 MEDIA_URL = '/media/'
 
-# it's saying upload my picture at this location
+# it's saying, upload my picture at this location
 MEDIA_ROOT = BASE_DIR/'static/media'
 
 # Default primary key field type
