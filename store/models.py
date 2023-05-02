@@ -26,6 +26,8 @@ class Product(models.Model):
     description = models.TextField(blank=True)
     slug = models.SlugField(max_length=250) #so that our products are unique!
     price = models.DecimalField(max_digits=4, decimal_places=2)
+    SIZE_CHOICES = (('S','Small'),('M','Medium'),('L','Large'),('XL','Extra Large'))
+    size = models.CharField(null=True, max_length=2, choices=SIZE_CHOICES)
     image = models.ImageField(upload_to='images/')
 
     class Meta: 
